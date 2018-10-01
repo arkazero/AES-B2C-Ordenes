@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1538357252839
+Build-Jdk: 1.8.0_121
+Built-By: arkazero
+Bundle-Description: OMS - Ordenes
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.html
+Bundle-ManifestVersion: 2
+Bundle-Name: OMS - Ordenes
+Bundle-SymbolicName: com.javariana.pica.oms-ordenes
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: co.ogv.anh.services;version="1.0.0"
+Import-Package: com.fasterxml.jackson.jaxrs.json,javax.jws,javax.ws.rs;v
+ ersion="[2.0,3)",javax.xml.bind,javax.xml.bind.annotation,javax.xml.dat
+ atype,javax.xml.namespace,javax.xml.ws,org.apache.camel.builder;version
+ ="[2.17,3)",org.slf4j;version="[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-3.5.0.201709291849

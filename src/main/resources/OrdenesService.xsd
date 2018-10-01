@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://service.touresbalon.com.co/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.touresbalon.com.co/">
+
+<xs:element name="actualizarOrden" type="tns:actualizarOrden"/>
+
+<xs:element name="actualizarOrdenResponse" type="tns:actualizarOrdenResponse"/>
+
+<xs:element name="actualizarStatusOrden" type="tns:actualizarStatusOrden"/>
+
+<xs:element name="actualizarStatusOrdenResponse" type="tns:actualizarStatusOrdenResponse"/>
+
+<xs:element name="consultarNumeroOrdenesCerradas" type="tns:consultarNumeroOrdenesCerradas"/>
+
+<xs:element name="consultarNumeroOrdenesCerradasResponse" type="tns:consultarNumeroOrdenesCerradasResponse"/>
+
+<xs:element name="consultarOrdenPorNumero" type="tns:consultarOrdenPorNumero"/>
+
+<xs:element name="consultarOrdenPorNumeroProducto" type="tns:consultarOrdenPorNumeroProducto"/>
+
+<xs:element name="consultarOrdenPorNumeroProductoResponse" type="tns:consultarOrdenPorNumeroProductoResponse"/>
+
+<xs:element name="consultarOrdenPorNumeroResponse" type="tns:consultarOrdenPorNumeroResponse"/>
+
+<xs:element name="consultarOrdenesAbiertas" type="tns:consultarOrdenesAbiertas"/>
+
+<xs:element name="consultarOrdenesAbiertasResponse" type="tns:consultarOrdenesAbiertasResponse"/>
+
+<xs:element name="consultarOrdenesCerradas" type="tns:consultarOrdenesCerradas"/>
+
+<xs:element name="consultarOrdenesCerradasResponse" type="tns:consultarOrdenesCerradasResponse"/>
+
+<xs:element name="consultarOrdenesPorCliente" type="tns:consultarOrdenesPorCliente"/>
+
+<xs:element name="consultarOrdenesPorClienteResponse" type="tns:consultarOrdenesPorClienteResponse"/>
+
+<xs:element name="crearOrden" type="tns:crearOrden"/>
+
+<xs:element name="crearOrdenResponse" type="tns:crearOrdenResponse"/>
+
+<xs:complexType name="consultarOrdenesAbiertas">
+<xs:sequence>
+<xs:element name="filtro" type="tns:filtroConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="filtroConsultaOrden">
+<xs:sequence>
+<xs:element name="fechaFinal" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="fechaInicial" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="idMes" type="xs:long" minOccurs="0"/>
+<xs:element name="idOrden" type="xs:string" minOccurs="0"/>
+<xs:element name="identificadorCliente" type="xs:long" minOccurs="0"/>
+<xs:element name="numRows" type="xs:int" minOccurs="0"/>
+<xs:element name="numeroProducto" type="xs:string" minOccurs="0"/>
+<xs:element name="pageNum" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenesAbiertasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="resultadoConsultaOrden">
+<xs:sequence>
+<xs:element name="consolidado" type="tns:consolidado" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="errores" type="tns:error" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="ordenesBO" type="tns:ordenBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="resultado" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consolidado">
+<xs:sequence>
+<xs:element name="mes" type="xs:string" minOccurs="0"/>
+<xs:element name="ordendesCerradas" type="xs:long" minOccurs="0"/>
+<xs:element name="totalFacturado" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="error">
+<xs:sequence>
+<xs:element name="codigo" type="xs:string" minOccurs="0"/>
+<xs:element name="mensaje" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ordenBO">
+<xs:sequence>
+<xs:element name="clientId" type="xs:string" minOccurs="0"/>
+<xs:element name="fechaCreacion" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="itemsBO" type="tns:itemBO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="orderId" type="xs:long" minOccurs="0"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="itemBO">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:float" minOccurs="0"/>
+<xs:element name="codigoProducto" type="xs:long" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="nombreProducto" type="xs:string" minOccurs="0"/>
+<xs:element name="numeroParte" type="xs:string" minOccurs="0"/>
+<xs:element name="precio" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarStatusOrden">
+<xs:sequence>
+<xs:element name="solicitudActualizacion" type="tns:solicitudActualizacionOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="solicitudActualizacionOrden">
+<xs:sequence>
+<xs:element name="codigoReservaEspectaculo" type="xs:string" minOccurs="0"/>
+<xs:element name="codigoReservaHotel" type="xs:string" minOccurs="0"/>
+<xs:element name="codigoReservaTransporte" type="xs:string" minOccurs="0"/>
+<xs:element name="estadoOrden" type="xs:string" minOccurs="0"/>
+<xs:element name="idOrden" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarStatusOrdenResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="resultadoOrden">
+<xs:sequence>
+<xs:element name="errores" type="tns:error" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="ordenBO" type="tns:ordenBO" minOccurs="0"/>
+<xs:element name="resultado" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarOrden">
+<xs:sequence>
+<xs:element name="solicitudActualizacion" type="tns:solicitudActualizacionOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="actualizarOrdenResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarNumeroOrdenesCerradas">
+<xs:sequence>
+<xs:element name="filtro" type="tns:filtroConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarNumeroOrdenesCerradasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenPorNumero">
+<xs:sequence>
+<xs:element name="filtro" type="tns:filtroConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenPorNumeroResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenesPorCliente">
+<xs:sequence>
+<xs:element name="filtro" type="tns:filtroConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenesPorClienteResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenPorNumeroProducto">
+<xs:sequence>
+<xs:element name="filtro" type="tns:filtroConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenPorNumeroProductoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearOrden">
+<xs:sequence>
+<xs:element name="orden" type="tns:ordenBO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearOrdenResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenesCerradas">
+<xs:sequence>
+<xs:element name="filtro" type="tns:filtroConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="consultarOrdenesCerradasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:resultadoConsultaOrden" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

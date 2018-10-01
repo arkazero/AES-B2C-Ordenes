@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014-2017, Red Hat, Inc. and/or its affiliates, and individual 
+	contributors by the @authors tag. Licensed under the Apache License, Version 
+	2.0 (the "License"); you may not use this file except in compliance with 
+	the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!-- Configures the Camel Context -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="           http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans.xsd           http://camel.apache.org/schema/spring    http://camel.apache.org/schema/spring/camel-spring.xsd   http://camel.apache.org/schema/cxf    http://camel.apache.org/schema/cxf/camel-cxf.xsd        http://cxf.apache.org/transports/http/configuration    http://cxf.apache.org/schemas/configuration/http-conf.xsd   ">
+    <import resource="properties-beans.xml"/>
+    <!-- EndPoint Rest conf -->
+    <cxf:rsServer address="${cxf.server}/Ordenes" id="rsServer" serviceClass="com.ordenes.rs.RSOrdenesImpl">
+        <cxf:extensionMappings>
+            <entry key="json" value="application/json"/>
+        </cxf:extensionMappings>
+        <cxf:providers>
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </cxf:providers>
+    </cxf:rsServer>
+    <!-- Logging conf -->
+    <bean class="org.slf4j.LoggerFactory" factory-method="getLogger" id="contableLog">
+        <constructor-arg type="java.lang.String" value="com.ordenes.rs"/>
+    </bean>
+    <bean class="org.apache.camel.builder.LoggingErrorHandlerBuilder " id="loggingErrorHandler">
+        <property name="logName" value="mylogger.name"/>
+        <property name="level" value="DEBUG"/>
+    </bean>
+    <camelContext id="_rs_ordenes" trace="false" xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="ref:confProps"/>
+        <dataFormats>
+            <json id="jack" library="Jackson"/>
+        </dataFormats>
+        <route id="_route_ordenes" streamCache="true" trace="false">
+            <from id="_from1" uri="cxfrs:bean:rsServer?bindingStyle=Default"/>
+            <log id="_log1" message="Body :::: ${body}"/>
+            <!-- 
+            <setHeader headerName="req" id="_setHeader5">
+                <simple>${body}</simple>
+            </setHeader>
+            <setHeader headerName="CamelVelocityResourceUri" id="_setHeader6">
+                <simple>templates/listarProductoCodigo.vm</simple>
+            </setHeader>
+            <to id="_to2" uri="velocity:dummy?loaderCache=false">
+                <description>Get xml request from template velocity</description>
+            </to>
+            <log id="_log2" message="Mensaje en Velocity :::: ${body}"/>
+            <setHeader headerName="SOAPAction" id="_setHeader7">
+                <constant>"http://xml.decameron.com/manageHolder"</constant>
+            </setHeader>
+            <setHeader headerName="operationName" id="_setHeader8">
+                <constant>manageHolder</constant>
+            </setHeader>
+            <setHeader headerName="operationNamespace" id="_setHeader9">
+                <constant/>
+            </setHeader>
+            <log id="_log1" loggerRef="bookingLog" message="::: Request VM: ${body}"/>
+            <setHeader headerName="Content-Type" id="_setHeader10">
+                <constant>application/soap+xml;charset=utf-8</constant>
+            </setHeader>
+            <setHeader headerName="CamelHttpMethod" id="_setHeader11">
+                <constant>POST</constant>
+            </setHeader>
+            <setHeader headerName="Host" id="_setHeader12">
+                <simple>{{decameron.booking.server}}</simple>
+            </setHeader>
+            <removeHeaders id="_removeHeaders1" pattern="req"/>
+            <to id="_to3" uri="https4://{{decameron.booking.detail.service.url}}?bridgeEndpoint=true&amp;sslContextParametersRef=sslContextParameters"/>
+            <setBody id="_setBody1">
+                <xpath logNamespaces="true" trim="true">//SOAP-ENV:Body/node()</xpath>
+            </setBody>
+             -->
+        </route>
+    </camelContext>
+</beans>
